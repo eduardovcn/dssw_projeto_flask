@@ -1,0 +1,8 @@
+<h1>Glossário</h1>
+
+<p>Tabela com os termos do glossário</p>
+<ul>
+  {% for termo in termos %}
+  <li>{{ termo.nome }}: {{ termo.descricao }}</li>
+  {% endfor %}
+</ul>
