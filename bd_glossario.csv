@@ -3,3 +3,5 @@ Flask;Flask é um framework web leve e flexível para Python. Ele foi criado por
 CSV;CSV (Comma-Separated Values) é um formato de arquivo simples usado para armazenar dados tabulares (como uma planilha ou banco de dados) em um formato de texto simples, onde cada linha do arquivo representa uma linha da tabela e os valores são separados por vírgulas ou outros delimitadores.
 Windows;SO de janela
 Linux;SO do Pinguin 
+SQL;Sub Query Language. Lingaguem voltada para Bancos de Dados
+AWS;Servidor em Nuvem

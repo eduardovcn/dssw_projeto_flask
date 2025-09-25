@@ -20,7 +20,7 @@ def sobre():
 def glossario():
     glossario_de_termos = []
     with open('bd_glossario.csv', 'r', newline='', encoding='utf-8') as arquivo:
-        reader = csv.reader(arquivo)
+        reader = csv.reader(arquivo, delimiter=';')
         for linha in reader:
             glossario_de_termos.append(linha)
     return render_template(template_name_or_list='glossario.html', glossario=glossario_de_termos)
@@ -31,6 +31,7 @@ def novo_termo():
 
 @app.route('/criar_termo', methods=['POST'])
 def criar_termo():
+
     termo = request.form['termo']
     definicao = request.form['definicao']
 
@@ -38,26 +39,37 @@ def criar_termo():
         writer = csv.writer(arquivo, delimiter=';')
         writer.writerow([termo, definicao])
 
-    return redirect(url_for('index')) 
+    return redirect(url_for('glossario'))
 
-@app.route('/excluir_termo/<int:termo_id>', methods=['POST'])
-def excluir_termo(termo_id):
+@app.route('/excluir_termo/<string:termo>', methods=['POST'])
+def excluir_termo(termo):
 
-    with open('bd_glosario.csv', newline='', encoding='utf-8') as arquivo:
-        reader = csv.reader(arquivo)
-        linhas = list(reader)
+    linhas_manter = []
+    termo_encontrado = False
+    try:
+        with open('bd_glossario.csv', newline='', encoding='utf-8') as arquivo:
+            reader = csv.reader(arquivo, delimiter=';')
 
-        #Encontrar e remover o termo pelo ID
-        for i, linha in enumerate(linhas):
-            if i == termo_id:
-                del linhas[i]
-                break
+            #Encontrar e remover o termo pelo ID
+            for linha in reader:
+                if linha and linha[0] != termo:
+                    linhas_manter.append(linha)
+                elif linha and linha[0] == termo:
+                    termo_encontrado = True
 
-        #Salvar as alterações no arquivo CSV
-    with open('bd_glossario.csv', 'w', newline='', encoding='utf-8') as arquivo:
-        writer = csv.writer(arquivo, delimiter=';')
-        writer.writerows(linhas)
+            #Salvar as alterações no arquivo CSV
+        with open('bd_glossario.csv', 'w', newline='', encoding='utf-8') as arquivo:
+            writer = csv.writer(arquivo, delimiter=';')
+            writer.writerows(linhas_manter)
         
+        if termo_encontrado:
+            print(f"Termo '{termo}' excluído com sucesso.")
+        else:
+            print(f"Termo '{termo}' não encontrado.")    
+
+    except Exception as e:
+        print(f"{e} - Arquivo não encontrado")
+
     return redirect(url_for('glossario'))
 
 
