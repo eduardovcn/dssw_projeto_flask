@@ -10,11 +10,61 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <style>
+        /* CSS para o Layout "Sticky Footer" */
+        html, body {
+            height: 100%; /* Garante que o html e o body ocupem 100% da altura */
+            margin: 0;
+        }
+
+        body {
+            display: flex; /* Ativa o modo Flexbox */
+            flex-direction: column; /* Organiza os itens em uma coluna (um embaixo do outro) */
+            min-height: 100vh; /* Altura mínima de 100% da tela */
+        }
+
+        /* O container do conteúdo principal deve crescer para ocupar o espaço vago */
+        .conteudo-wrapper {
+            flex-grow: 1; 
+        }
+
+        /* CSS para estilizar os elementos da sua página index */
+        .texto-principal {
+            text-align: justify; /* JUSTIFICA O TEXTO */
+            font-size: 1.1rem; /* Tamanho da fonte um pouco maior para leitura */
+            line-height: 1.6; /* Espaçamento entre as linhas */
+            padding: 20px; /* Um respiro para o texto não colar nas bordas */
+        }
+
+        .rodape-principal {
+            background-color: #343a40; /* Um fundo escuro, como é comum em rodapés */
+            color: ghostwhite;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .rodape-principal p {
+            margin: 5px 0;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .rodape-principal a {
+            color: #1e90ff; /* Cor azul para o link */
+            text-decoration: none;
+        }
+
+        .rodape-principal a:hover {
+            text-decoration: underline; /* Sublinha o link ao passar o mouse */
+        }
+
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Guia TI</a>
+        <a class="navbar-brand" href="#">Dicionário de TI</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -49,13 +99,7 @@
                   <a class="dropdown-item" href="/novo_termo">Novo Termo</a>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
